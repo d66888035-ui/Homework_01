@@ -236,26 +236,24 @@ const users = [
 
 const displayObj = (obj) => {
   return (
-    <li key={obj.id}>
-      <ul>
-        {Object.entries(obj).map(([key, value]) =>
-          typeof value !== "object" ? (
-            <li key={key}>
-              {key}: {value}
-            </li>
-          ) : (
-            <li key={key}>
-              {key}: <ul>{displayObj(value)}</ul>
-            </li>
-          )
-        )}
-      </ul>
-    </li>
+    <ul key={Object.values(obj)[0]}>
+      {Object.entries(obj).map(([key, value]) =>
+        typeof value !== "object" ? (
+          <li key={key}>
+            {key}: {value}
+          </li>
+        ) : (
+          <li key={key}>
+            {key}: {displayObj(value)}
+          </li>
+        )
+      )}
+    </ul>
   );
 };
 
 rootContainerReact.render(
   <React.Fragment>
-    <ul>{users.map((item) => displayObj(item))}</ul>
+    {users.map((item) => displayObj(item))};
   </React.Fragment>
 );
